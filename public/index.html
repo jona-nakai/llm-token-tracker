@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LLM token usage</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+<div class="viz-root">
+  <div class="page">
+    <header class="topbar">
+      <h1>LLM token usage</h1>
+      <div class="status">
+        <span id="updated" aria-live="polite"></span>
+        <button id="refresh" type="button">Refresh</button>
+      </div>
+    </header>
+
+    <section class="filters" aria-label="Filters">
+      <div class="segmented" id="period-tabs" role="group" aria-label="Period">
+        <button type="button" data-period="day">Day</button>
+        <button type="button" data-period="week">Week</button>
+        <button type="button" data-period="month">Month</button>
+        <button type="button" data-period="all">All time</button>
+      </div>
+      <div class="period-nav">
+        <button type="button" class="arrow" id="prev" aria-label="Previous period" title="Previous (←)">‹</button>
+        <span class="period-label" id="period-label" aria-live="polite"></span>
+        <button type="button" class="arrow" id="next" aria-label="Next period" title="Next (→)">›</button>
+        <button type="button" id="current">Today</button>
+      </div>
+    </section>
+
+    <div class="error" id="error" role="alert"></div>
+
+    <main class="content" id="content">
+      <section class="hero">
+        <div class="figure">
+          <div class="hero-label">Tokens</div>
+          <div class="hero-value" id="hero-tokens">–</div>
+        </div>
+        <div class="figure">
+          <div class="hero-label">API-equivalent cost</div>
+          <div class="hero-value" id="hero-cost">–</div>
+        </div>
+      </section>
+
+      <section class="kpis" id="kpis" aria-label="Token totals"></section>
+      <section class="source-cards" id="source-cards" aria-label="By source"></section>
+
+      <section class="card">
+        <div class="card-head">
+          <h2 id="chart-title">Over time</h2>
+          <div class="card-tools">
+            <div class="segmented small" id="metric-tabs" role="group" aria-label="Chart metric">
+              <button type="button" data-metric="tokens">Tokens</button>
+              <button type="button" data-metric="cost">Cost</button>
+            </div>
+          </div>
+        </div>
+        <div class="legend" id="chart-legend"></div>
+        <div class="chart" id="chart"></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>By model<span class="hint">Cost under each token count is what those tokens cost</span></h2>
+        </div>
+        <div class="table-wrap" id="models"></div>
+        <p class="footnote">
+          Input is uncached input. Cache writes and reads are prompt-cache tokens. Output includes reasoning,
+          so reasoning is shown separately but not added again to totals.
+        </p>
+      </section>
+
+      <section class="card">
+        <details id="rates">
+          <summary>Rates used</summary>
+          <div class="notes" id="rates-notes"></div>
+          <div class="table-wrap" id="rates-table"></div>
+        </details>
+      </section>
+    </main>
+  </div>
+  <div class="tooltip" id="tooltip" role="tooltip"></div>
+</div>
+</body>
+</html>

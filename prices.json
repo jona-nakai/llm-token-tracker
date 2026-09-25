@@ -1,0 +1,74 @@
+{
+  "checkedAt": "2026-09-25",
+  "unit": "USD per 1M tokens",
+  "sources": {
+    "anthropic": "https://platform.claude.com/docs/en/about-claude/pricing",
+    "openai": "https://developers.openai.com/api/docs/pricing",
+    "bedrock": "https://aws.amazon.com/bedrock/pricing/",
+    "crossCheck": "https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json"
+  },
+  "providers": {
+    "bedrock": {
+      "multiplier": 1.1,
+      "note": "Claude Code on Bedrock uses a us.* geographic inference profile. Regional endpoints carry a 10% premium over global endpoints for Claude Sonnet 4.5 / Haiku 4.5 / Opus 4.5 and later. Set BEDROCK_PRICE_MULTIPLIER=1 if you use global.* profiles."
+    },
+    "anthropicUsGeo": {
+      "multiplier": 1.1,
+      "note": "First-party requests with inference_geo \"us\" on Claude 4.6+ are billed at 1.1x."
+    }
+  },
+  "models": {
+    "claude-fable-5-1":  { "name": "Claude Fable 5.1",  "vendor": "anthropic", "input": 10,   "cacheWrite": 12.5,  "cacheWrite1h": 20,  "cacheRead": 0.25, "output": 50 },
+    "claude-mythos-5-1": { "name": "Claude Mythos 5.1", "vendor": "anthropic", "input": 10,   "cacheWrite": 12.5,  "cacheWrite1h": 20,  "cacheRead": 0.25, "output": 50 },
+    "claude-fable-5":    { "name": "Claude Fable 5",    "vendor": "anthropic", "input": 10,   "cacheWrite": 12.5,  "cacheWrite1h": 20,  "cacheRead": 1,    "output": 50 },
+    "claude-mythos-5":   { "name": "Claude Mythos 5",   "vendor": "anthropic", "input": 10,   "cacheWrite": 12.5,  "cacheWrite1h": 20,  "cacheRead": 1,    "output": 50 },
+    "claude-opus-5-5":   { "name": "Claude Opus 5.5",   "vendor": "anthropic", "input": 4,    "cacheWrite": 5,     "cacheWrite1h": 8,   "cacheRead": 0.2,  "output": 20, "fastMultiplier": 2 },
+    "claude-opus-5":     { "name": "Claude Opus 5",     "vendor": "anthropic", "input": 5,    "cacheWrite": 6.25,  "cacheWrite1h": 10,  "cacheRead": 0.5,  "output": 25, "fastMultiplier": 2 },
+    "claude-opus-4-8":   { "name": "Claude Opus 4.8",   "vendor": "anthropic", "input": 5,    "cacheWrite": 6.25,  "cacheWrite1h": 10,  "cacheRead": 0.5,  "output": 25, "fastMultiplier": 2 },
+    "claude-opus-4-7":   { "name": "Claude Opus 4.7",   "vendor": "anthropic", "input": 5,    "cacheWrite": 6.25,  "cacheWrite1h": 10,  "cacheRead": 0.5,  "output": 25 },
+    "claude-opus-4-6":   { "name": "Claude Opus 4.6",   "vendor": "anthropic", "input": 5,    "cacheWrite": 6.25,  "cacheWrite1h": 10,  "cacheRead": 0.5,  "output": 25 },
+    "claude-opus-4-5":   { "name": "Claude Opus 4.5",   "vendor": "anthropic", "input": 5,    "cacheWrite": 6.25,  "cacheWrite1h": 10,  "cacheRead": 0.5,  "output": 25 },
+    "claude-opus-4-1":   { "name": "Claude Opus 4.1",   "vendor": "anthropic", "input": 15,   "cacheWrite": 18.75, "cacheWrite1h": 30,  "cacheRead": 1.5,  "output": 75, "legacyRegionalPricing": true },
+    "claude-opus-4":     { "name": "Claude Opus 4",     "vendor": "anthropic", "input": 15,   "cacheWrite": 18.75, "cacheWrite1h": 30,  "cacheRead": 1.5,  "output": 75, "legacyRegionalPricing": true },
+    "claude-sonnet-5":   { "name": "Claude Sonnet 5",   "vendor": "anthropic", "input": 2,    "cacheWrite": 2.5,   "cacheWrite1h": 4,   "cacheRead": 0.2,  "output": 10 },
+    "claude-sonnet-4-6": { "name": "Claude Sonnet 4.6", "vendor": "anthropic", "input": 3,    "cacheWrite": 3.75,  "cacheWrite1h": 6,   "cacheRead": 0.3,  "output": 15 },
+    "claude-sonnet-4-5": { "name": "Claude Sonnet 4.5", "vendor": "anthropic", "input": 3,    "cacheWrite": 3.75,  "cacheWrite1h": 6,   "cacheRead": 0.3,  "output": 15,
+      "longContext": { "threshold": 200000, "input": 6, "cacheWrite": 7.5, "cacheWrite1h": 12, "cacheRead": 0.6, "output": 22.5 } },
+    "claude-sonnet-4":   { "name": "Claude Sonnet 4",   "vendor": "anthropic", "input": 3,    "cacheWrite": 3.75,  "cacheWrite1h": 6,   "cacheRead": 0.3,  "output": 15, "legacyRegionalPricing": true,
+      "longContext": { "threshold": 200000, "input": 6, "cacheWrite": 7.5, "cacheWrite1h": 12, "cacheRead": 0.6, "output": 22.5 } },
+    "claude-haiku-4-5":  { "name": "Claude Haiku 4.5",  "vendor": "anthropic", "input": 1,    "cacheWrite": 1.25,  "cacheWrite1h": 2,   "cacheRead": 0.1,  "output": 5 },
+    "claude-3-5-haiku":  { "name": "Claude Haiku 3.5",  "vendor": "anthropic", "input": 0.8,  "cacheWrite": 1,     "cacheWrite1h": 1.6, "cacheRead": 0.08, "output": 4, "legacyRegionalPricing": true },
+
+    "gpt-6-astra":   { "name": "GPT-6 Astra",   "vendor": "openai", "input": 10,   "cacheWrite": 12.5,  "cacheRead": 1,     "output": 50,  "priorityMultiplier": 2,
+      "longContext": { "threshold": 272000, "input": 20,  "cacheWrite": 25,   "cacheRead": 2,    "output": 75 } },
+    "gpt-6-sol":     { "name": "GPT-6 Sol",     "vendor": "openai", "input": 2,    "cacheWrite": 2.5,   "cacheRead": 0.2,   "output": 10,  "priorityMultiplier": 2,
+      "longContext": { "threshold": 272000, "input": 4,   "cacheWrite": 5,    "cacheRead": 0.4,  "output": 15 } },
+    "gpt-6-luna":    { "name": "GPT-6 Luna",    "vendor": "openai", "input": 0.1,  "cacheWrite": 0.125, "cacheRead": 0.01,  "output": 0.5, "priorityMultiplier": 2,
+      "longContext": { "threshold": 272000, "input": 0.2, "cacheWrite": 0.25, "cacheRead": 0.02, "output": 0.75 } },
+    "gpt-5.6-sol":   { "name": "GPT-5.6 Sol",   "vendor": "openai", "input": 4,    "cacheWrite": 5,     "cacheRead": 0.4,   "output": 20,  "priorityMultiplier": 2,
+      "longContext": { "threshold": 272000, "input": 8,   "cacheWrite": 10,   "cacheRead": 0.8,  "output": 30 } },
+    "gpt-5.6-terra": { "name": "GPT-5.6 Terra", "vendor": "openai", "input": 2,    "cacheWrite": 2.5,   "cacheRead": 0.2,   "output": 12,  "priorityMultiplier": 2,
+      "longContext": { "threshold": 272000, "input": 4,   "cacheWrite": 5,    "cacheRead": 0.4,  "output": 18 } },
+    "gpt-5.6-luna":  { "name": "GPT-5.6 Luna",  "vendor": "openai", "input": 0.2,  "cacheWrite": 0.25,  "cacheRead": 0.02,  "output": 1.2, "priorityMultiplier": 2,
+      "longContext": { "threshold": 272000, "input": 0.4, "cacheWrite": 0.5,  "cacheRead": 0.04, "output": 1.8 } },
+    "gpt-5.5":       { "name": "GPT-5.5",       "vendor": "openai", "input": 5,    "cacheRead": 0.5,    "output": 30,  "priorityMultiplier": 2.5,
+      "longContext": { "threshold": 272000, "input": 10,  "cacheRead": 1,     "output": 45 } },
+    "gpt-5.4":       { "name": "GPT-5.4",       "vendor": "openai", "input": 2.5,  "cacheRead": 0.25,   "output": 15,  "priorityMultiplier": 2,
+      "longContext": { "threshold": 272000, "input": 5,   "cacheRead": 0.5,   "output": 22.5 } },
+    "gpt-5.4-mini":  { "name": "GPT-5.4 mini",  "vendor": "openai", "input": 0.75, "cacheRead": 0.075,  "output": 4.5, "priorityMultiplier": 2 },
+    "gpt-5.3-codex": { "name": "GPT-5.3 Codex", "vendor": "openai", "input": 1.75, "cacheRead": 0.175,  "output": 14,  "priorityMultiplier": 2 },
+    "gpt-5.2-codex": { "name": "GPT-5.2 Codex", "vendor": "openai", "input": 1.75, "cacheRead": 0.175,  "output": 14 },
+    "gpt-5.2":       { "name": "GPT-5.2",       "vendor": "openai", "input": 1.75, "cacheRead": 0.175,  "output": 14,  "priorityMultiplier": 2 },
+    "gpt-5.1-codex-max":  { "name": "GPT-5.1 Codex Max",  "vendor": "openai", "input": 1.25, "cacheRead": 0.125, "output": 10 },
+    "gpt-5.1-codex-mini": { "name": "GPT-5.1 Codex mini", "vendor": "openai", "input": 0.25, "cacheRead": 0.025, "output": 2 },
+    "gpt-5.1-codex": { "name": "GPT-5.1 Codex", "vendor": "openai", "input": 1.25, "cacheRead": 0.125,  "output": 10 },
+    "gpt-5.1":       { "name": "GPT-5.1",       "vendor": "openai", "input": 1.25, "cacheRead": 0.125,  "output": 10,  "priorityMultiplier": 2 },
+    "gpt-5-codex":   { "name": "GPT-5 Codex",   "vendor": "openai", "input": 1.25, "cacheRead": 0.125,  "output": 10 },
+    "gpt-5-mini":    { "name": "GPT-5 mini",    "vendor": "openai", "input": 0.25, "cacheRead": 0.025,  "output": 2 },
+    "gpt-5":         { "name": "GPT-5",         "vendor": "openai", "input": 1.25, "cacheRead": 0.125,  "output": 10,  "priorityMultiplier": 2 }
+  },
+  "aliases": {},
+  "unpriced": {
+    "codex-auto-review": "Codex's hidden approval-review (guardian) model. OpenAI publishes no API price for it, so its tokens are counted but not costed. To estimate it, add an alias such as \"codex-auto-review\": \"gpt-5.6-sol\" under \"aliases\"."
+  }
+}
